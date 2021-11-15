@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4202a7022dbc41849934604fed150c2a, type: 3}
+  m_Name: EnemyProperty 1
+  m_EditorClassIdentifier: 
+  initialSkin: RaccoonSon
+  _enemySpeed: 0.2
+  _bonus: 3
+  _enemyHealth: 1
+  _enemyScale: {x: 1, y: 1, z: 1}
+  _enemyColl: {x: 0.9, y: 1.4}
+  _hitParticle: {fileID: 5983799332055765878, guid: a63a0dcf03bafc643882e5dd64d4e0a9,
+    type: 3}
