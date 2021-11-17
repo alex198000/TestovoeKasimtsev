@@ -43,6 +43,47 @@ namespace Menu
 
         private void Start()
         {
+            if (!PlayerPrefs.HasKey("Sound"))       //активация звуков при 1 включении
+            {
+                PlayerPrefs.SetInt("Sound", 1);
+            }
+            if (!PlayerPrefs.HasKey("SoundEff"))
+            {
+                PlayerPrefs.SetInt("SoundEff", 1);
+            }
+            if (!PlayerPrefs.HasKey("Music"))
+            {
+                PlayerPrefs.SetInt("Music", 1);
+            }
+            if (!PlayerPrefs.HasKey("Min"))       //активация настроек при 1 включении
+            {
+                PlayerPrefs.SetInt("Min", 10);
+            }
+            if (!PlayerPrefs.HasKey("SpeedEnemy"))
+            {
+                PlayerPrefs.SetFloat("SpeedEnemy", 2.2f);
+            }
+            if (!PlayerPrefs.HasKey("GippoSpeed"))
+            {
+                PlayerPrefs.SetFloat("GippoSpeed", 2.5f);
+            }
+            if (!PlayerPrefs.HasKey("ScoreToWin"))
+            {
+                PlayerPrefs.SetInt("ScoreToWin", 10);
+            }
+            if (!PlayerPrefs.HasKey("ScoreToHitEnemy"))
+            {
+                PlayerPrefs.SetInt("ScoreToHitEnemy", 2);
+            }
+            if (!PlayerPrefs.HasKey("SpeedRate"))
+            {
+                PlayerPrefs.SetFloat("SpeedRate", 2.0f);
+            }
+            if (!PlayerPrefs.HasKey("SpeedEnemyAttack"))
+            {
+                PlayerPrefs.SetFloat("SpeedEnemyAttack", 5.5f);
+            }
+
             _min = _settingsControl.Min;
             _speedEnemy = _settingsControl.SpeedEnemy;
             _gippoSpeed = _settingsControl.GippoSpeed;
