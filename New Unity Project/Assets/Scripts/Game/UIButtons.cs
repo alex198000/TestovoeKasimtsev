@@ -104,6 +104,7 @@ namespace Game
 
         public void MenuButton()
         {
+            _scoreControl.Score = 0;
             SceneManager.LoadScene(0);
         }
         public void UiFireButton()
