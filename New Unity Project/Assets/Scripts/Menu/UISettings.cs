@@ -54,7 +54,42 @@ namespace Menu
             if (!PlayerPrefs.HasKey("Music"))
             {
                 PlayerPrefs.SetInt("Music", 1);
-            }            
+            }
+            if (!PlayerPrefs.HasKey("Min"))       //активация настроек по умолчанию
+            {
+                PlayerPrefs.SetInt("Min", 10);
+                _settingsControl.Min = PlayerPrefs.GetInt("Min");
+            }
+            if (!PlayerPrefs.HasKey("SpeedEnemy"))
+            {
+                PlayerPrefs.SetFloat("SpeedEnemy", 2.2f);
+                _settingsControl.SpeedEnemy = PlayerPrefs.GetFloat("SpeedEnemy");
+            }
+            if (!PlayerPrefs.HasKey("GippoSpeed"))
+            {
+                PlayerPrefs.SetFloat("GippoSpeed", 2.5f);
+                _settingsControl.GippoSpeed = PlayerPrefs.GetFloat("GippoSpeed");
+            }
+            if (!PlayerPrefs.HasKey("ScoreToWin"))
+            {
+                PlayerPrefs.SetInt("ScoreToWin", 10);
+                _settingsControl.ScoreToWin = PlayerPrefs.GetInt("ScoreToWin");
+            }
+            if (!PlayerPrefs.HasKey("ScoreToHitEnemy"))
+            {
+                PlayerPrefs.SetInt("ScoreToHitEnemy", 2);
+                _settingsControl.ScoreToHitEnemy = PlayerPrefs.GetInt("ScoreToHitEnemy");
+            }
+            if (!PlayerPrefs.HasKey("SpeedRate"))
+            {
+                PlayerPrefs.SetFloat("SpeedRate", 2.0f);
+                _settingsControl.SpeedRate = PlayerPrefs.GetFloat("SpeedRate");
+            }
+            if (!PlayerPrefs.HasKey("SpeedEnemyAttack"))
+            {
+                PlayerPrefs.SetFloat("SpeedEnemyAttack", 5.5f);
+                _settingsControl.SpeedEnemyAttack = PlayerPrefs.GetFloat("SpeedEnemyAttack");
+            }
 
             _min = _settingsControl.Min;
             _speedEnemy = _settingsControl.SpeedEnemy;
