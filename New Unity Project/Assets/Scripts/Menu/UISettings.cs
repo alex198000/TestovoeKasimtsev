@@ -41,7 +41,7 @@ namespace Menu
         public float SpeedRate { get => _speedRate; set => _speedRate = value; }
         public float SpeedEnemyAttack { get => _speedEnemyAttack; set => _speedEnemyAttack = value; }
 
-        private void Start()
+        public void Awake()
         {
             if (!PlayerPrefs.HasKey("Sound"))       //активация звуков при 1 включении
             {
