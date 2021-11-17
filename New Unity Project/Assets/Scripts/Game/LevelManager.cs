@@ -23,7 +23,39 @@ namespace Game
             PersonsHealth.OnHitEnemy -= UpdateTextScore;
             PersonsHealth.OnHitEnemy -= WinCheck;
         }
-       
+
+        private void Start()
+        {
+            if (!PlayerPrefs.HasKey("Min"))       //активация настроек по умолчанию
+            {
+                PlayerPrefs.SetInt("Min", 10);
+            }
+            if (!PlayerPrefs.HasKey("SpeedEnemy"))
+            {
+                PlayerPrefs.SetFloat("SpeedEnemy", 2.2f);
+            }
+            if (!PlayerPrefs.HasKey("GippoSpeed"))
+            {
+                PlayerPrefs.SetFloat("GippoSpeed", 2.5f);
+            }
+            if (!PlayerPrefs.HasKey("ScoreToWin"))
+            {
+                PlayerPrefs.SetInt("ScoreToWin", 10);
+            }
+            if (!PlayerPrefs.HasKey("ScoreToHitEnemy"))
+            {
+                PlayerPrefs.SetInt("ScoreToHitEnemy", 2);
+            }
+            if (!PlayerPrefs.HasKey("SpeedRate"))
+            {
+                PlayerPrefs.SetFloat("SpeedRate", 2.0f);
+            }
+            if (!PlayerPrefs.HasKey("SpeedEnemyAttack"))
+            {
+                PlayerPrefs.SetFloat("SpeedEnemyAttack", 5.5f);
+            }
+        }
+
         private void WinCheck()
         {
             if (_scoreControl.Score >= _scoreControl.ScoreWin)
