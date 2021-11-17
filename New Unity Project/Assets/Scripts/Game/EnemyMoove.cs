@@ -96,12 +96,14 @@ namespace Game
 
         protected override void Walk()
         {
-            _animPerson.state.SetAnimation(0, "walk", true);
+            //_animPerson.state.SetAnimation(0, "walk", true);
+            _animPerson.AnimationName = "walk";
         }
 
         protected override void Idle()
         {
-            _animPerson.state.SetAnimation(0, "Idle", true);            
+            //_animPerson.state.SetAnimation(0, "Idle", true);
+            _animPerson.AnimationName = "idle";
         }
     }
 }

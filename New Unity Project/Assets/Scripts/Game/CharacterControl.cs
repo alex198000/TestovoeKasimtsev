@@ -36,11 +36,12 @@ namespace Game
                 UpMove();
                 //Walk();
             }
-            //if (SimpleInput.GetAxis("Vertical") != 0)
-            //{
-            //    Idle();
-            //}
-                transform.position += _position * Time.deltaTime * _speedPlayer;          
+            if (SimpleInput.GetAxis("Vertical") != 0)
+            {
+                //Idle();
+                _animPerson.AnimationName = "idle";
+            }
+            transform.position += _position * Time.deltaTime * _speedPlayer;          
         }
 
         protected override void Idle()

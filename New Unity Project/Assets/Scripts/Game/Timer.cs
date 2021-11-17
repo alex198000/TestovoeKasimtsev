@@ -14,14 +14,23 @@ namespace Game
         [SerializeField] private Text _timeSecondsText;
         [SerializeField] private Text _timeMinuteText;
         
-        private void Start()
+        private void OnEnable()
         {
+            OnEndGame += EndTime;
+            PersonsHealth.OnDeathGippo += EndTime;
+            UiPanels.OnTimerStop += EndTime;
             _timeControl.TimeMinute = _settingsControl.Min -1;
            
             _timeControl.TimeSecond = _timeControl.TimeSecondStart;
             StartCoroutine(TimeBack());
         }
-            
+        private void OnDisable()
+        {
+            OnEndGame -= EndTime;
+            PersonsHealth.OnDeathGippo -= EndTime;
+            UiPanels.OnTimerStop -= EndTime;
+        }
+
         public IEnumerator TimeBack()
         {
             while (_timeControl.TimeMinute >= 0)
@@ -56,10 +65,17 @@ namespace Game
                     }                    
                 }
             }
-            if (_timeControl.TimeMinute <= 0)
+            if (_timeControl.TimeMinute <= 0)       // проверить
             {
                 OnEndGame?.Invoke();
             }
+        }
+
+        public void EndTime()
+        {
+            //_timeControl.TimeMinute = 0;
+            //_timeControl.TimeSecond = 0;
+            StopCoroutine(TimeBack());
         }
     }
 }

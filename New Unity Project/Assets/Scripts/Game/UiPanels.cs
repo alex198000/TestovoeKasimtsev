@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +22,8 @@ namespace Game
 
         public bool LockFunc { get => _lockFunc; set => _lockFunc = value; }
 
+        public static event Action OnTimerStop;
+
         private void OnEnable()
         {
             Timer.OnEndGame += DefeatPanel;
@@ -36,22 +39,22 @@ namespace Game
             PersonsHealth.OnHitGippo -= LivePanel;
             PersonsHealth.OnDeathGippo -= DefeatPanel;
 
-            _tween.Kill();                       //при раскомите дает ошибку не может найти убитый твин
-            //_winPanel.transform.DOKill();
-            //_pausePanel.transform.DOKill();
+            //_tween.Kill();                       //при раскомите дает ошибку не может найти убитый твин
+            _defeatPanel.transform.DOKill();
+            _winPanel.transform.DOKill();
+            _pausePanel.transform.DOKill();
         }
 
 
         public void WinPanel()
         {
-
             if (_lockFunc != true)                         // ждем когда панель остановится
             {
                 if (_winPanel.transform.position.y < 0)    //если панель под экраном
                 {
                     _particleWin.Play();   //<ParticleSystem.MainModule>
                     _lockFunc = true;
-
+                    OnTimerStop?.Invoke();
                     Time.timeScale = 0;
 
                         _tween = _winPanel.transform.DOMove(new Vector3(0, 0, 0), 1f, true).SetEase(Ease.InOutBack).SetUpdate(true).OnComplete(() =>
@@ -94,13 +97,13 @@ namespace Game
 
         public void DefeatPanel()
         {
-
             if (_lockFunc != true)
             {
                 if (_defeatPanel.transform.position.y < 0)
                 {
                     _particleDefeat.Play();
                     _lockFunc = true;
+                    OnTimerStop?.Invoke();
                     Time.timeScale = 0;
                     _tween = _defeatPanel.transform.DOMove(new Vector3(0, 0, 0), 1f, true).SetEase(Ease.InOutBack).SetUpdate(true).OnComplete(() =>
                     {

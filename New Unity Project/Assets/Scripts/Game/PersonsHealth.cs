@@ -51,6 +51,7 @@ namespace Game
                         _hpPersons = _health;
                         _scoreControl.Score += _bonus;
                         OnDeathGippo?.Invoke();
+                        //Timer.OnEndGame?.Invoke();
                     }
                 }
             }
