@@ -40,9 +40,9 @@ namespace Game
             PersonsHealth.OnDeathGippo -= DefeatPanel;
 
             //_tween.Kill();                       //при раскомите дает ошибку не может найти убитый твин
-            _defeatPanel.transform.DOKill();
-            _winPanel.transform.DOKill();
-            _pausePanel.transform.DOKill();
+            //_defeatPanel.transform.DOKill();
+            //_winPanel.transform.DOKill();
+            //_pausePanel.transform.DOKill();
         }
 
 

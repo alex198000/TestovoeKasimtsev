@@ -151,11 +151,11 @@ namespace Menu
             }
         }        
 
-        private void OnDisable()
-        {
-            _setMenu.transform.DOKill();
-            _exitMenu.transform.DOKill();
-        }
+        //private void OnDisable()
+        //{
+        //    _setMenu.transform.DOKill();
+        //    _exitMenu.transform.DOKill();
+        //}
 
         private void OnApplicationQuit()
         {

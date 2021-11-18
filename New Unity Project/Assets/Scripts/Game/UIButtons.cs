@@ -65,14 +65,14 @@ namespace Game
 
         public void RepeatButton()
         {
-            if (_particleDefeat.isPlaying)
-            {
-                _particleDefeat.Stop();
-            }
-            if (_particleWin.isPlaying)
-            {
-                _particleWin.Stop();
-            }
+            //if (_particleDefeat.isPlaying)
+            //{
+            //    _particleDefeat.Stop();
+            //}
+            //if (_particleWin.isPlaying)
+            //{
+            //    _particleWin.Stop();
+            //}
             if (_uiPanel.LockFunc != true)
             {                           
                 if (_defeatPanel.transform.position.y >= 0)
@@ -90,14 +90,14 @@ namespace Game
                     _starImage[i].gameObject.SetActive(false);
                 }
                
-                _Hippo.gameObject.SetActive(true);
-                _gippoHealth.HpPersons = _gippoHealth.HpMax;
-                _timeControl.TimeMinute = _settingsControl.Min - 1;
-                _timeControl.TimeSecond = _timeControl.TimeSecondStart;
+                //_Hippo.gameObject.SetActive(true);
+                //_gippoHealth.HpPersons = _gippoHealth.HpMax;
+                //_timeControl.TimeMinute = _settingsControl.Min - 1;
+                //_timeControl.TimeSecond = _timeControl.TimeSecondStart;
                 _scoreControl.Score = 0;
-                _levelManager.UpdateTextScore();
-                _uiPanel.LivePanel();
-                //SceneManager.LoadScene(1); 
+                //_levelManager.UpdateTextScore();
+                //_uiPanel.LivePanel();
+                SceneManager.LoadScene(1); 
                 StartCoroutine(_timer.TimeBack());
             }
         }
@@ -105,6 +105,7 @@ namespace Game
         public void MenuButton()
         {
             _scoreControl.Score = 0;
+            Time.timeScale = 1;
             SceneManager.LoadScene(0);
         }
         public void UiFireButton()

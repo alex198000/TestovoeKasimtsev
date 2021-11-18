@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class EnemyMoove : BaseMoove
+    public class EnemyMoove : MonoBehaviour
     {
         [SerializeField] private SettingsControl _settingsControl;
         [SerializeField] private Vector3 _diraction;
@@ -24,14 +24,14 @@ namespace Game
         public int Left { get => _left; set => _left = value; }
         public int Right { get => _right; set => _right = value; }
 
-        public static event Action OnMooveOpen;
-        public static event Action OnMooveClosed;
+        //public static event Action OnMooveOpen;
+        //public static event Action OnMooveClosed;
 
         void OnEnable()
         {
-            OnMooveOpen += MooveOpen;
-            OnMooveClosed += MooveClosed;
-           
+            //OnMooveOpen += MooveOpen;
+            //OnMooveClosed += MooveClosed;
+            PersonsHealth.OnHitEnemy += StopDeActiv;
             _stopMoove = false;
             _diraction.x = _left;
             _speedEnemy = _settingsControl.SpeedEnemy;
@@ -40,8 +40,9 @@ namespace Game
 
         private void OnDisable()
         {
-            OnMooveOpen -= MooveOpen;
-            OnMooveClosed -= MooveClosed;
+            //OnMooveOpen -= MooveOpen;
+            // OnMooveClosed -= MooveClosed;
+            PersonsHealth.OnHitEnemy -= StopDeActiv;
         }
         void MooveEnemy()
         {           
@@ -94,16 +95,20 @@ namespace Game
             _mooveStop = rc; 
         }
 
-        protected override void Walk()
-        {
-            //_animPerson.state.SetAnimation(0, "walk", true);
-            _animPerson.AnimationName = "walk";
-        }
+        //protected override void Walk()
+        //{
+        //    //_animPerson.state.SetAnimation(0, "walk", true);
+        //    _animPerson.AnimationName = "walk";
+        //}
 
-        protected override void Idle()
+        //protected override void Idle()
+        //{
+        //    //_animPerson.state.SetAnimation(0, "Idle", true);
+        //    _animPerson.AnimationName = "idle";
+        //}
+        void StopDeActiv()
         {
-            //_animPerson.state.SetAnimation(0, "Idle", true);
-            _animPerson.AnimationName = "idle";
+            _mooveStop = 0;
         }
     }
 }

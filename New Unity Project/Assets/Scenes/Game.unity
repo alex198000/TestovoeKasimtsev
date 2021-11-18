@@ -15738,7 +15738,7 @@ MonoBehaviour:
     willGrow: 0
   - pooledObject: {fileID: 8069914263206178591, guid: 783849c94d3b9144e85570a43fb6c385,
       type: 3}
-    pooledAmount: 19
+    pooledAmount: 7
     willGrow: 1
   _pooledObjects: []
 --- !u!4 &2055884004
