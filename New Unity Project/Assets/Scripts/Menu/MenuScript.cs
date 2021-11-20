@@ -22,7 +22,7 @@ namespace Menu
         private int _soundEffOFF = 0;
         private int _soundOFF = 0;        
 
-        private Tween _tween;
+        private Tween _tween = null;
 
         public GameObject PLost { get => _pLost; set => _pLost = value; }
         public GameObject P1effectLost { get => _p1effectLost; set => _p1effectLost = value; }
@@ -149,13 +149,17 @@ namespace Menu
                     });                    
                 }
             }
-        }        
+        }
 
-        //private void OnDisable()
-        //{
-        //    _setMenu.transform.DOKill();
-        //    _exitMenu.transform.DOKill();
-        //}
+        private void OnDisable()
+        {
+            if (DOTween.instance != null)
+            {
+                _tween?.Kill();
+            }
+            //_setMenu.transform.DOKill();
+            //_exitMenu.transform.DOKill();
+        }
 
         private void OnApplicationQuit()
         {

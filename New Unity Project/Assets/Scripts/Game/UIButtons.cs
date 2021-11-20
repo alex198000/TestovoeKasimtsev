@@ -25,7 +25,7 @@ namespace Game
 
         [SerializeField] protected Timer _timer;
 
-        protected Tween _tween;
+        protected Tween _tween = null;
         public void PauseButton()
         {
             if (_uiPanel.LockFunc != true)
@@ -65,23 +65,15 @@ namespace Game
 
         public void RepeatButton()
         {
-            //if (_particleDefeat.isPlaying)
-            //{
-            //    _particleDefeat.Stop();
-            //}
-            //if (_particleWin.isPlaying)
-            //{
-            //    _particleWin.Stop();
-            //}
             if (_uiPanel.LockFunc != true)
-            {                           
+            {
                 if (_defeatPanel.transform.position.y >= 0)
-                {                       
+                {
                     _uiPanel.DefeatPanel();
                 }
 
                 if (_winPanel.transform.position.y >= 0)
-                {                   
+                {
                     _uiPanel.WinPanel();
                 }
 
@@ -89,15 +81,8 @@ namespace Game
                 {
                     _starImage[i].gameObject.SetActive(false);
                 }
-               
-                //_Hippo.gameObject.SetActive(true);
-                //_gippoHealth.HpPersons = _gippoHealth.HpMax;
-                //_timeControl.TimeMinute = _settingsControl.Min - 1;
-                //_timeControl.TimeSecond = _timeControl.TimeSecondStart;
-                _scoreControl.Score = 0;
-                //_levelManager.UpdateTextScore();
-                //_uiPanel.LivePanel();
-                SceneManager.LoadScene(1); 
+                _scoreControl.Score = 0;               
+                SceneManager.LoadScene(1);
                 StartCoroutine(_timer.TimeBack());
             }
         }
@@ -111,6 +96,14 @@ namespace Game
         public void UiFireButton()
         {
             _gippoAttack.Fire(false, 0.02f);
+        }
+
+        private void OnDisable()
+        {
+            if (DOTween.instance != null)
+            {
+                _tween?.Kill();
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spine.Unity;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ namespace Game
 {
     public class EnemyMoove : MonoBehaviour
     {
+        [SerializeField] private SkeletonAnimation _animPrs;
         [SerializeField] private SettingsControl _settingsControl;
         [SerializeField] private Vector3 _diraction;
         [SerializeField] private float _speedEnemy;
@@ -17,20 +19,14 @@ namespace Game
         [SerializeField] private Rigidbody2D _rb;
         [SerializeField] private bool _stopMoove;
 
-
         System.Random rand = new System.Random();
         public Vector3 Diraction { get => _diraction; set => _diraction = value; }
         public float SpeedEnemy { get => _speedEnemy; set => _speedEnemy = value; }
         public int Left { get => _left; set => _left = value; }
         public int Right { get => _right; set => _right = value; }
 
-        //public static event Action OnMooveOpen;
-        //public static event Action OnMooveClosed;
-
         void OnEnable()
         {
-            //OnMooveOpen += MooveOpen;
-            //OnMooveClosed += MooveClosed;
             PersonsHealth.OnHitEnemy += StopDeActiv;
             _stopMoove = false;
             _diraction.x = _left;
@@ -40,18 +36,21 @@ namespace Game
 
         private void OnDisable()
         {
-            //OnMooveOpen -= MooveOpen;
-            // OnMooveClosed -= MooveClosed;
             PersonsHealth.OnHitEnemy -= StopDeActiv;
         }
         void MooveEnemy()
         {           
-            if (transform.position.x > 0 && _stopMoove != true)
-            {
+            if (transform.position.x > 0 && _stopMoove != true && _animPrs.AnimationName != "walk")
+            {               
                 _spinePersons.LeftMove();
+                //_spinePersons.Walk();
                 transform.Translate(_diraction * _speedEnemy * Time.deltaTime);              
             }
-
+            if (transform.position.x > 0 && _stopMoove == true && _animPrs.AnimationName == "walk")
+            {               
+                _spinePersons.LeftMove();
+                transform.Translate(_diraction * _speedEnemy * Time.deltaTime);
+            }
         }
         IEnumerator MooveOn()
         {
@@ -94,18 +93,7 @@ namespace Game
             _stopMoove = true;
             _mooveStop = rc; 
         }
-
-        //protected override void Walk()
-        //{
-        //    //_animPerson.state.SetAnimation(0, "walk", true);
-        //    _animPerson.AnimationName = "walk";
-        //}
-
-        //protected override void Idle()
-        //{
-        //    //_animPerson.state.SetAnimation(0, "Idle", true);
-        //    _animPerson.AnimationName = "idle";
-        //}
+       
         void StopDeActiv()
         {
             _mooveStop = 0;

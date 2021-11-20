@@ -18,7 +18,7 @@ namespace Game
         [SerializeField] private PersonsHealth _gippoHealth;
         [SerializeField] private bool _lockFunc = false;
 
-        protected Tween _tween;
+        protected Tween _tween = null;
 
         public bool LockFunc { get => _lockFunc; set => _lockFunc = value; }
 
@@ -39,10 +39,10 @@ namespace Game
             PersonsHealth.OnHitGippo -= LivePanel;
             PersonsHealth.OnDeathGippo -= DefeatPanel;
 
-            //_tween.Kill();                       //при раскомите дает ошибку не может найти убитый твин
-            //_defeatPanel.transform.DOKill();
-            //_winPanel.transform.DOKill();
-            //_pausePanel.transform.DOKill();
+            if (DOTween.instance != null)
+            {
+                _tween?.Kill();
+            }
         }
 
 

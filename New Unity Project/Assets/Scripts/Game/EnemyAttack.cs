@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spine.Unity;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ namespace Game
 {
     public class EnemyAttack : MonoBehaviour
     {
+        [SerializeField] protected SkeletonAnimation _animPers;
         [SerializeField] private SettingsControl _settingsControl;
         [SerializeField] private PersonsAttack _personsAttack;
         [SerializeField] private bool _attackOpen;
@@ -16,6 +18,7 @@ namespace Game
         {
             OnHitClosed += AttackOff;
             OnHitOpen += AttackOn;
+            //_animPers = GetComponent<SkeletonAnimation>();
             _personsAttack.FireRate = _settingsControl.SpeedEnemyAttack;
             StartCoroutine(FireOn());           
         }
@@ -27,7 +30,8 @@ namespace Game
         private void EnemyFire()
         {
             if (_personsAttack.NextFire >= _personsAttack.FireRate)   //(Time.time % 5) == 0
-            {               
+            {
+                //_animPers.state.SetAnimation(0, "shoot", false);
                 _personsAttack.Fire(true, 0f);             
                 OnHitClosed?.Invoke();               
             }

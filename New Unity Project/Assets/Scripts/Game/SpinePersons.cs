@@ -24,12 +24,13 @@ namespace Game
 
         public void RightMove()
         {
-            Walk();
+           // Walk();
             _actors.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
         public void LeftMove()
         {
-            Walk();
+            //Walk();
+
             _actors.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
         }
 
@@ -46,18 +47,12 @@ namespace Game
         public void StopMove()
         {
             Idle();
-        }       
-
-        private void GippoWin()
-        {
-            _animPerson.state.SetAnimation(0, "joy_jump", true);
-            Debug.Log("Win");
         }
-        private void GippoDefeat()
+
+        protected override void Attack()
         {
-            _animPerson.state.SetAnimation(0, "joy", true);
-            Debug.Log("Def");
-        }       
+            _animPerson.state.SetAnimation(0, "shoot", true);
+        }             
     }
 }
 

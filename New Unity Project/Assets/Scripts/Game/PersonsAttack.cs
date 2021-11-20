@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Game
@@ -16,6 +17,7 @@ namespace Game
         public float FireRate { get => _fireRate; set => _fireRate = value; }
         public float NextFire { get => _nextFire; set => _nextFire = value; }
 
+       // public static event Action OnHitPersons;
         private void Start()
         {
             if(_enemyAttack != true)
@@ -49,6 +51,7 @@ namespace Game
                     SnowBall.SetActive(true);
                     SnowBall.transform.SetParent(_snowBallManager);
                     _nextFire = 0;
+                   // OnHitPersons?.Invoke();
                 }
             }
         }

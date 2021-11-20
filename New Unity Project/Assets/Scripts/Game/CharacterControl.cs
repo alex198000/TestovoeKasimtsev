@@ -13,12 +13,14 @@ namespace Game
         {
             Timer.OnEndGame += HippoDeactiv;
             LevelManager.OnWinGame += HippoDeactiv;
+           // PersonsAttack.OnHitPersons += Attack;
         }
 
         private void OnDisable()
         {
             Timer.OnEndGame -= HippoDeactiv;
             LevelManager.OnWinGame -= HippoDeactiv;
+            //PersonsAttack.OnHitPersons -= Attack;
         }
 
         private void Start()
@@ -28,27 +30,26 @@ namespace Game
         }
         void Update()
         {
-            
+           
+
             _position = new Vector3(0f, SimpleInput.GetAxis("Vertical"), 0f);          // SimpleInput.GetAxis("Horizontal"),     //если нужно будет двигаться по х
            
-            if (SimpleInput.GetAxis("Vertical") == 0)
+            if (SimpleInput.GetAxis("Vertical") != 0 && _animPerson.AnimationName != "walk")
             {
                 UpMove();
                 //Walk();
             }
-            if (SimpleInput.GetAxis("Vertical") != 0)
+            if (SimpleInput.GetAxis("Vertical") == 0 && _animPerson.AnimationName == "walk")
             {
-                //Idle();
-                _animPerson.AnimationName = "idle";
+                Idle();
+                //_animPerson.AnimationName = "idle";
             }
             transform.position += _position * Time.deltaTime * _speedPlayer;          
         }
 
         protected override void Idle()
         {
-            float timeAnime = _animPerson.skeleton.Data.FindAnimation("Idle").Duration;
-            _animPerson.state.SetAnimation(0, "Idle", true);
-            _animPerson.state.AddAnimation(0, "Applause", true, timeAnime); 
+            base.Idle();
         }
         protected override void Walk()
         {
@@ -58,5 +59,10 @@ namespace Game
         {
             gameObject.SetActive(false);
         }
-    }
+
+        protected override void Attack()
+        {
+            base.Attack();
+        }
+}
 }
