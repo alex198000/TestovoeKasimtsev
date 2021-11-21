@@ -17,6 +17,7 @@ namespace Game
         public static event Action OnHitEnemy;
         public static event Action OnHitGippo;
         public static event Action OnDeathGippo;
+
         void OnEnable()
         {
             _hpPersons = _health;

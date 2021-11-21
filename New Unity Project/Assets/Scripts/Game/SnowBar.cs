@@ -6,8 +6,9 @@ namespace Game
     public class SnowBar : MonoBehaviour
     {
         [SerializeField] private Slider _slider;
-      
-        [SerializeField] private Image fill;
+        [SerializeField] private Gradient _gradient;
+        [SerializeField] private Image anch;
+        [SerializeField] private Text _fillText;
 
         public Slider Slider { get => _slider; set => _slider = value; }
 
@@ -15,10 +16,14 @@ namespace Game
         {
             _slider.maxValue = power;
             _slider.value = power;
+            anch.color = _gradient.Evaluate(1f);
+            _fillText.color = _gradient.Evaluate(1f);
         }
         public void SetHealth(float power)
         {
             _slider.value = power;
+            anch.color = _gradient.Evaluate(_slider.normalizedValue);
+            _fillText.color = _gradient.Evaluate(_slider.normalizedValue);
         }
     }
 }

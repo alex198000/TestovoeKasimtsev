@@ -4,7 +4,7 @@ namespace Game
 {
     public class ButtonsControl : MonoBehaviour
     {
-        [SerializeField] private SpinePersons _spineGippo;
+        [SerializeField] private HippoMoove _hippoMoove;
         [SerializeField] private PersonsAttack _gippoAttack;
         [SerializeField] private UIButtons _uiButtons;
 
@@ -21,35 +21,35 @@ namespace Game
             }
             if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                _spineGippo.LeftMove();
+                _hippoMoove.LeftMove();
             }
             if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.LeftArrow))
             {
-                _spineGippo.StopMove();
+                _hippoMoove.StopMove();
             }
             if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
             {
-                _spineGippo.RightMove();
+                _hippoMoove.RightMove();
             }
             if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.RightArrow))
             {
-                _spineGippo.StopMove();
+                _hippoMoove.StopMove();
             }
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             {
-                _spineGippo.UpMove();
+                _hippoMoove.UpMove();
             }
             if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow))
             {
-                _spineGippo.StopMove();
+                _hippoMoove.StopMove();
             }
             if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
             {
-                _spineGippo.DownMove();
+                _hippoMoove.DownMove();
             }
             if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow))
             {
-                _spineGippo.StopMove();
+                _hippoMoove.StopMove();
             }
         }
         void ESCbutton()                             // кнопка esc или  шаг назад на телефоне

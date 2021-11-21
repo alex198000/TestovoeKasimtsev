@@ -2,49 +2,44 @@
 
 namespace Game
 {
-    public class CharacterControl : SpinePersons
+    public class CharacterControl : HippoMoove
     {
         [SerializeField] private SettingsControl _settingsControl;
         [SerializeField] private float _speedPlayer;
-              
+
         private Vector3 _position;
 
         private void OnEnable()
         {
             Timer.OnEndGame += HippoDeactiv;
             LevelManager.OnWinGame += HippoDeactiv;
-           // PersonsAttack.OnHitPersons += Attack;
+            PersonsAttack.OnShotHippo += Attack;
         }
 
         private void OnDisable()
         {
             Timer.OnEndGame -= HippoDeactiv;
             LevelManager.OnWinGame -= HippoDeactiv;
-            //PersonsAttack.OnHitPersons -= Attack;
+            PersonsAttack.OnShotHippo -= Attack;
         }
 
         private void Start()
         {
-            
             _speedPlayer = _settingsControl.GippoSpeed;
         }
         void Update()
         {
-           
-
             _position = new Vector3(0f, SimpleInput.GetAxis("Vertical"), 0f);          // SimpleInput.GetAxis("Horizontal"),     //если нужно будет двигаться по х
-           
+
             if (SimpleInput.GetAxis("Vertical") != 0 && _animPerson.AnimationName != "walk")
             {
                 UpMove();
-                //Walk();
             }
             if (SimpleInput.GetAxis("Vertical") == 0 && _animPerson.AnimationName == "walk")
             {
                 Idle();
-                //_animPerson.AnimationName = "idle";
             }
-            transform.position += _position * Time.deltaTime * _speedPlayer;          
+            transform.position += _position * Time.deltaTime * _speedPlayer;
         }
 
         protected override void Idle()
@@ -64,5 +59,5 @@ namespace Game
         {
             base.Attack();
         }
-}
+    }
 }

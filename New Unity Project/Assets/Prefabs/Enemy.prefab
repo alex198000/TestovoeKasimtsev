@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 5286834730768764305}
   - component: {fileID: 5286834730768764311}
   - component: {fileID: 5286834730768764308}
-  - component: {fileID: 289679485705457938}
   - component: {fileID: 1509185131294537486}
   - component: {fileID: 2378428052583693451}
   - component: {fileID: -7196570841104705671}
   - component: {fileID: -6523485052306089734}
   - component: {fileID: 4089767039789010193}
+  - component: {fileID: 5603426275315105484}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -87,20 +87,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &289679485705457938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5286834730768764309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 915913db169db6948bf549e57ede031d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animPerson: {fileID: 5286834731100714237}
-  _actors: {fileID: 5286834730768764309}
 --- !u!114 &1509185131294537486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,14 +137,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 698d08509282acb4fbc0d4d7c225cb7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animPerson: {fileID: 0}
-  _animPrs: {fileID: 5286834731100714237}
+  _animPerson: {fileID: 5286834731100714237}
+  _actors: {fileID: 5286834730768764309}
   _settingsControl: {fileID: 11400000, guid: be45d6dce087eb54781b94b179b9cb8d, type: 2}
   _diraction: {x: 1, y: 0, z: 0}
   _speedEnemy: 2.5
   _mooveStop: 4
   _mooveTrue: 8
-  _spinePersons: {fileID: 289679485705457938}
   _left: 1
   _right: -1
   _rb: {fileID: 5286834730768764308}
@@ -199,6 +184,20 @@ MonoBehaviour:
   _spawnPoint: {fileID: 8300669895254599574}
   _snowBallTag: SnowBall
   _enemyAttack: 1
+--- !u!114 &5603426275315105484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5286834730768764309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b4fa67421ca4d54b888ac69a7c6b475, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animPerson: {fileID: 5286834731100714237}
+  _actors: {fileID: 5286834730768764309}
 --- !u!1 &5286834731100714226
 GameObject:
   m_ObjectHideFlags: 0

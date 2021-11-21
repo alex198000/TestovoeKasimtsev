@@ -1,17 +1,25 @@
-﻿using Spine.Unity;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
-    public class SpineEnemy : MonoBehaviour
-    {        
-        [SerializeField] protected SkeletonAnimation _animEnemy;
+    public class SpineEnemy : BaseMoove
+    { 
+        [SerializeField] private GameObject _actors;        
 
-        public void OnEnable()
+        protected override void Idle()
         {
-            float timeAnime = _animEnemy.skeleton.Data.FindAnimation("Idle").Duration;
-            _animEnemy.state.SetAnimation(0, "Idle", false);
-            _animEnemy.state.AddAnimation(0, "Applause", true, timeAnime);
+            _animPerson.state.SetAnimation(0, "Idle", true);
         }
+        protected override void Walk()
+        {
+            _animPerson.state.SetAnimation(0, "walk", true);
+            _actors.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+        }
+        protected override void Attack()
+        {
+            float timeAnim = _animPerson.skeleton.Data.FindAnimation("shoot").Duration;
+            _animPerson.state.SetAnimation(0, "Applause", false);
+            _animPerson.state.AddAnimation(0, "Idle", true, timeAnim);
+        }      
     }
 }

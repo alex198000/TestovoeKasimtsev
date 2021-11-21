@@ -17,7 +17,8 @@ namespace Game
         public float FireRate { get => _fireRate; set => _fireRate = value; }
         public float NextFire { get => _nextFire; set => _nextFire = value; }
 
-       // public static event Action OnHitPersons;
+        public static event Action OnShotHippo;
+        public static event Action OnShotEnemy;
         private void Start()
         {
             if(_enemyAttack != true)
@@ -37,9 +38,10 @@ namespace Game
         }
 
         public void Fire(bool isEnemy, float grav)
-        {
+        {            
             if (_nextFire > _fireRate)
             {
+                
                 GameObject SnowBall = ObjectPooler.objectPooler.GetPooledObject(_snowBallTag);
                 if (SnowBall != null)
                 {
@@ -50,10 +52,11 @@ namespace Game
                     SnowBall.GetComponent<SnowBallScript>().SetPropertyToSnowBall(_snowBallProperty);
                     SnowBall.SetActive(true);
                     SnowBall.transform.SetParent(_snowBallManager);
-                    _nextFire = 0;
-                   // OnHitPersons?.Invoke();
+                    _nextFire = 0;                    
                 }
-            }
+                if (isEnemy == false) OnShotHippo?.Invoke();
+                else OnShotEnemy?.Invoke();
+            }            
         }
     }
 }
