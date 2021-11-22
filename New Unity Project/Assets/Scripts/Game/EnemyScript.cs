@@ -41,7 +41,7 @@ namespace Game
             Timer.OnEndGame -= EnemyDeactiv;
             LevelManager.OnWinGame -= EnemyDeactiv;
             PersonsHealth.OnDeathGippo -= EnemyDeactiv;
-            //PersonsHealth.OnHitEnemy -= EnemyWounded;
+            //PersonsHealth.OnHitEnemy -= EnemyWounded;            
         }
 
         public void SetPropertyToEnemy(EnemyProperty enemyProperty)             // форммируем врага
@@ -58,6 +58,9 @@ namespace Game
         }    
         void EnemyDeactiv()
         {
+
+            //_enemyHealth.StopCoroutine(WoundedEnemy());
+            //_enemyHealth.StopCoroutine(DeadEnemy());
             gameObject.SetActive(false);
         }
 
@@ -66,11 +69,11 @@ namespace Game
                 _enemyStateOn = false;
                 _enemyStateOff = true;
                 _enemyMoove.SpeedEnemy += 50;
-            _enemyMoove.MooveStop = 0;
+            //_enemyMoove.MooveStop = 0;
             _enemyMoove.Diraction = new Vector3(_enemyMoove.Right, _enemyMoove.Diraction.y, _enemyMoove.Diraction.z);            
         }
         public void EnemyWounded()
-        {
+        {            
             _enemyMoove.SpeedEnemy = 0f;
             _hitParticle.Play();
             float timeAnimWoundEnem = _skeleton.skeleton.Data.FindAnimation("wake_up").Duration;

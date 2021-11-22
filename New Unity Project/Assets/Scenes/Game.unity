@@ -13974,7 +13974,7 @@ MonoBehaviour:
   _snowBallScript: {fileID: 8069914263206178586, guid: 783849c94d3b9144e85570a43fb6c385,
     type: 3}
   _snowBallProperty: {fileID: 11400000, guid: 8b3a3fe219e7f96408d7fa5123948ea6, type: 2}
-  _speedSnowBallMax: 140
+  _speedSnowBallMax: 180
 --- !u!1 &1354725570
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,10 +24,10 @@ namespace Game
         public bool StopMoove { get => _stopMoove; set => _stopMoove = value; }
         public double MooveStop { get => _mooveStop; set => _mooveStop = value; }
 
-        void OnEnable()
+        private void OnEnable()
         {
             PersonsHealth.OnHitEnemy += StopDeActiv;
-            PersonsAttack.OnShotEnemy += AttackEnemy;
+            //PersonsAttack.OnShotEnemy += AttackEnemy;
             _stopMoove = false;
             _diraction.x = _left;
             _speedEnemy = _settingsControl.SpeedEnemy;
@@ -37,7 +37,7 @@ namespace Game
         private void OnDisable()
         {
             PersonsHealth.OnHitEnemy -= StopDeActiv;
-            PersonsAttack.OnShotEnemy -= AttackEnemy;
+            //PersonsAttack.OnShotEnemy -= AttackEnemy;
             StopCoroutine(MooveOn());
         }
 
@@ -46,7 +46,7 @@ namespace Game
             base.Idle();
         }
 
-        private void AttackEnemy()
+        public void AttackEnemy()
         {
             base.Attack();
         }
@@ -100,8 +100,6 @@ namespace Game
         }
         private void StopDeActiv()
         {
-            //base.Wounded();
-            
             _mooveStop = 0;
         }
     }

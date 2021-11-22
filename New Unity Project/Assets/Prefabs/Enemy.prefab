@@ -163,6 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animPers: {fileID: 5286834731100714237}
   _settingsControl: {fileID: 11400000, guid: be45d6dce087eb54781b94b179b9cb8d, type: 2}
+  _enemyMoove: {fileID: -7196570841104705671}
   _personsAttack: {fileID: 4089767039789010193}
   _attackOpen: 0
 --- !u!114 &4089767039789010193

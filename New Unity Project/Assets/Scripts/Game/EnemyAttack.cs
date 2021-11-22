@@ -9,6 +9,7 @@ namespace Game
     {
         [SerializeField] protected SkeletonAnimation _animPers;
         [SerializeField] private SettingsControl _settingsControl;
+        [SerializeField] private EnemyMoove _enemyMoove;
         [SerializeField] private PersonsAttack _personsAttack;
         [SerializeField] private bool _attackOpen;
 
@@ -18,7 +19,7 @@ namespace Game
         {
             OnHitClosed += AttackOff;
             OnHitOpen += AttackOn;
-            //_animPers = GetComponent<SkeletonAnimation>();
+            
             _personsAttack.FireRate = _settingsControl.SpeedEnemyAttack;
             StartCoroutine(FireOn());           
         }
@@ -31,7 +32,7 @@ namespace Game
         {
             if (_personsAttack.NextFire >= _personsAttack.FireRate)   //(Time.time % 5) == 0
             {
-                //_animPers.state.SetAnimation(0, "shoot", false);
+                _enemyMoove.AttackEnemy();
                 _personsAttack.Fire(true, 0f);             
                 OnHitClosed?.Invoke();               
             }

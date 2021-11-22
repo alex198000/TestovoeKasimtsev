@@ -19,11 +19,20 @@ namespace Game
         public static event Action OnHitGippo;
         public static event Action OnDeathGippo;
 
-        void OnEnable()
+        private void OnEnable()
         {
             _hpPersons = _health;
+            Timer.OnEndGame += StopAllCoroutines;
+            LevelManager.OnWinGame += StopAllCoroutines;
+            OnDeathGippo += StopAllCoroutines;
         }
-        
+        private void OnDisable()
+        {
+            Timer.OnEndGame -= StopAllCoroutines;
+            LevelManager.OnWinGame -= StopAllCoroutines;
+            OnDeathGippo -= StopAllCoroutines;
+        }
+
         private void OnTriggerEnter2D(Collider2D col)
         {
             SnowBallScript snowBallScript = col.gameObject.GetComponent<SnowBallScript>();
@@ -35,11 +44,11 @@ namespace Game
                     _hpPersons -= snowBallScript.DamageSnowBall;
                     
                     if (_hpPersons <= 0)
-                    {
-                        StartCoroutine(WoundedEnemy());
+                    {                        
                         _hpPersons = _health;
                         _scoreControl.Score += _bonus;
                         OnHitEnemy?.Invoke();
+                        if(gameObject.active) StartCoroutine(WoundedEnemy());
                     }
                 }
                 if (_isEmemy == false && snowBallScript.IsEnemyShot)
@@ -57,21 +66,25 @@ namespace Game
             }
         }
 
-        IEnumerator WoundedEnemy()
+        private IEnumerator WoundedEnemy()
         {            
           _enemyScript.EnemyWounded();
-          yield return new WaitForSeconds(2f);           
+          yield return new WaitForSeconds(1f);           
             
           StartCoroutine(DeadEnemy());
           yield return new WaitForFixedUpdate();
         }
 
-        IEnumerator DeadEnemy()
+        private IEnumerator DeadEnemy()
         {            
             _enemyScript.EnemyDeath();
-            //StopCoroutine(WoundedEnemy());
-            //StopCoroutine(DeadEnemy());
+            
             yield return new WaitForFixedUpdate();           
-        }
+        }  
+        //void StopCorutines()
+        //{
+        //    StopCoroutine(WoundedEnemy());
+        //    StopCoroutine(DeadEnemy());
+        //}
     }
 }
