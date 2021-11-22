@@ -6,6 +6,7 @@ namespace Game
     {
         [SerializeField] private SettingsControl _settingsControl;
         [SerializeField] private float _speedPlayer;
+        [SerializeField] private ParticleSystem _hippoParticle;
 
         private Vector3 _position;
 
@@ -14,6 +15,7 @@ namespace Game
             Timer.OnEndGame += HippoDeactiv;
             LevelManager.OnWinGame += HippoDeactiv;
             PersonsAttack.OnShotHippo += Attack;
+            PersonsHealth.OnHitGippo += Wounded;
         }
 
         private void OnDisable()
@@ -21,6 +23,7 @@ namespace Game
             Timer.OnEndGame -= HippoDeactiv;
             LevelManager.OnWinGame -= HippoDeactiv;
             PersonsAttack.OnShotHippo -= Attack;
+            PersonsHealth.OnHitGippo -= Wounded;
         }
 
         private void Start()
@@ -58,6 +61,12 @@ namespace Game
         protected override void Attack()
         {
             base.Attack();
+        }
+
+        protected override void Wounded()
+        {
+            base.Wounded();
+            _hippoParticle.Play();
         }
     }
 }

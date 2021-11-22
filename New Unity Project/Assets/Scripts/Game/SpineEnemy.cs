@@ -20,6 +20,13 @@ namespace Game
             float timeAnim = _animPerson.skeleton.Data.FindAnimation("shoot").Duration;
             _animPerson.state.SetAnimation(0, "Applause", false);
             _animPerson.state.AddAnimation(0, "Idle", true, timeAnim);
-        }      
+        }
+
+        protected override void Wounded()
+        {
+            float timeAnimWoundEnem = _animPerson.skeleton.Data.FindAnimation("wake_up").Duration;
+            _animPerson.state.SetAnimation(0, "wake_up", false);
+            _animPerson.state.AddAnimation(0, "Idle", true, timeAnimWoundEnem);
+        }
     }
 }

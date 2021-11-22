@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Game
@@ -35,8 +36,7 @@ namespace Game
                     
                     if (_hpPersons <= 0)
                     {
-                        _enemyScript.EnemyDeath();                     //вылет врага за экран
-                        //gameObject.SetActive(false);
+                        StartCoroutine(WoundedEnemy());
                         _hpPersons = _health;
                         _scoreControl.Score += _bonus;
                         OnHitEnemy?.Invoke();
@@ -51,11 +51,27 @@ namespace Game
                         gameObject.SetActive(false);
                         _hpPersons = _health;
                         _scoreControl.Score += _bonus;
-                        OnDeathGippo?.Invoke();
-                        //Timer.OnEndGame?.Invoke();
+                        OnDeathGippo?.Invoke();                       
                     }
                 }
             }
+        }
+
+        IEnumerator WoundedEnemy()
+        {            
+          _enemyScript.EnemyWounded();
+          yield return new WaitForSeconds(2f);           
+            
+          StartCoroutine(DeadEnemy());
+          yield return new WaitForFixedUpdate();
+        }
+
+        IEnumerator DeadEnemy()
+        {            
+            _enemyScript.EnemyDeath();
+            //StopCoroutine(WoundedEnemy());
+            //StopCoroutine(DeadEnemy());
+            yield return new WaitForFixedUpdate();           
         }
     }
 }

@@ -10,8 +10,7 @@ namespace Game
         [SerializeField] private int _bonus;
         [SerializeField] private int _enemyHealth;
         [SerializeField] private Vector3 _enemyScale;
-        [SerializeField] private Vector2 _enemyColl;
-        [SerializeField] private ParticleSystem _hitParticle;
+        [SerializeField] private Vector2 _enemyColl;       
 
         public float SpeedEnemy
         {
@@ -55,15 +54,7 @@ namespace Game
             {
                 return _enemyColl;
             }
-        }
-
-        public ParticleSystem ParticleHit
-        {
-            get
-            {
-                return _hitParticle;
-            }
-        }
+        }      
     }
 }
 

@@ -25,6 +25,13 @@ namespace Game
             _animPerson.state.AddAnimation(0, "Idle", true, timeAnim);
         }
 
+        protected override void Wounded()
+        {
+            float timeAnimWound = _animPerson.skeleton.Data.FindAnimation("wake_up").Duration;
+            _animPerson.state.SetAnimation(0, "wake_up", false);
+            _animPerson.state.AddAnimation(0, "Idle", true, timeAnimWound);
+        }
+
         public void RightMove()
         {
             Walk();
@@ -49,7 +56,7 @@ namespace Game
         public void StopMove()
         {
             Idle();
-        }                    
+        }        
     }
 }
 

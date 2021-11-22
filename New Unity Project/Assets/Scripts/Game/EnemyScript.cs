@@ -16,11 +16,13 @@ namespace Game
 
         public bool EnemyStateOn { get => _enemyStateOn; set => _enemyStateOn = value; }
         public bool EnemyStateOff { get => _enemyStateOff; set => _enemyStateOff = value; }
+        public ParticleSystem HitParticle { get => _hitParticle; set => _hitParticle = value; }
 
         private void Awake()
         {
             _colider = GetComponent<BoxCollider2D>();
             _skeleton = GetComponentInChildren<SkeletonAnimation>();
+            _hitParticle = GetComponentInChildren<ParticleSystem>();
             _enemyHealth = GetComponent<PersonsHealth>();                     
         }
 
@@ -29,6 +31,7 @@ namespace Game
             Timer.OnEndGame += EnemyDeactiv;
             LevelManager.OnWinGame += EnemyDeactiv;
             PersonsHealth.OnDeathGippo += EnemyDeactiv;
+            //PersonsHealth.OnHitEnemy += EnemyWounded;
             _enemyStateOn = false;
             _enemyStateOff = false;
         }
@@ -37,7 +40,8 @@ namespace Game
         {
             Timer.OnEndGame -= EnemyDeactiv;
             LevelManager.OnWinGame -= EnemyDeactiv;
-            PersonsHealth.OnDeathGippo -= EnemyDeactiv;            
+            PersonsHealth.OnDeathGippo -= EnemyDeactiv;
+            //PersonsHealth.OnHitEnemy -= EnemyWounded;
         }
 
         public void SetPropertyToEnemy(EnemyProperty enemyProperty)             // форммируем врага
@@ -47,7 +51,7 @@ namespace Game
             _enemyHealth.HpMax = enemyProperty.EnemyHealth;
             _enemyHealth.HpPersons = _enemyHealth.HpMax;
             _colider.size = enemyProperty.EnemyColl;
-            _hitParticle = enemyProperty.ParticleHit;
+            //_hitParticle = enemyProperty.ParticleHit;
             _enemyHealth.Bonus = enemyProperty.Bonus;
             _skeleton.initialSkinName = enemyProperty.InitialSkin;                             //смена скина врага
             _skeleton.Skeleton.SetSkin(enemyProperty.InitialSkin);            
@@ -58,12 +62,20 @@ namespace Game
         }
 
         public void EnemyDeath()                  // улет врага вправо за экран
+        {            
+                _enemyStateOn = false;
+                _enemyStateOff = true;
+                _enemyMoove.SpeedEnemy += 50;
+            _enemyMoove.MooveStop = 0;
+            _enemyMoove.Diraction = new Vector3(_enemyMoove.Right, _enemyMoove.Diraction.y, _enemyMoove.Diraction.z);            
+        }
+        public void EnemyWounded()
         {
+            _enemyMoove.SpeedEnemy = 0f;
             _hitParticle.Play();
-            _enemyStateOn = false;
-            _enemyStateOff = true;
-            _enemyMoove.SpeedEnemy *= 20;
-            _enemyMoove.Diraction = new Vector3(_enemyMoove.Right, _enemyMoove.Diraction.y, _enemyMoove.Diraction.z);
+            float timeAnimWoundEnem = _skeleton.skeleton.Data.FindAnimation("wake_up").Duration;
+            _skeleton.state.SetAnimation(0, "wake_up", false);
+            _skeleton.state.AddAnimation(0, "Idle", true, timeAnimWoundEnem);
         }
     }
 }

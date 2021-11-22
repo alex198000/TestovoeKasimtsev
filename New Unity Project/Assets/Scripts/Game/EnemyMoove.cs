@@ -21,11 +21,13 @@ namespace Game
         public float SpeedEnemy { get => _speedEnemy; set => _speedEnemy = value; }
         public int Left { get => _left; set => _left = value; }
         public int Right { get => _right; set => _right = value; }
+        public bool StopMoove { get => _stopMoove; set => _stopMoove = value; }
+        public double MooveStop { get => _mooveStop; set => _mooveStop = value; }
 
         void OnEnable()
         {
             PersonsHealth.OnHitEnemy += StopDeActiv;
-            PersonsAttack.OnShotEnemy += Attack;
+            PersonsAttack.OnShotEnemy += AttackEnemy;
             _stopMoove = false;
             _diraction.x = _left;
             _speedEnemy = _settingsControl.SpeedEnemy;
@@ -49,7 +51,7 @@ namespace Game
             base.Attack();
         }
 
-        void MooveEnemy()
+        private void MooveEnemy()
         {
             if (transform.position.x > 0 && _stopMoove != true && _animPerson.AnimationName == "Idle")
             {
@@ -59,7 +61,7 @@ namespace Game
             transform.Translate(_diraction * _speedEnemy * Time.deltaTime);
         }
 
-        void IdleEnemy()
+        private void IdleEnemy()
         {            
             if (transform.position.x > 0 && _stopMoove == true && _animPerson.AnimationName == "walk")
             {
@@ -95,9 +97,11 @@ namespace Game
             _mooveTrue = ro; 
             StartCoroutine(MooveOn());
             yield return null;
-        }             
-        void StopDeActiv()
+        }
+        private void StopDeActiv()
         {
+            //base.Wounded();
+            
             _mooveStop = 0;
         }
     }

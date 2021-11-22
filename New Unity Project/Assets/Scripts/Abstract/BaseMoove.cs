@@ -7,7 +7,9 @@ namespace Game
     {
         [SerializeField] protected SkeletonAnimation _animPerson;
         protected abstract void Attack();
-        
+
+        protected abstract void Wounded();
+
 
         protected abstract void Walk();
         
