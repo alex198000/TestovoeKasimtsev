@@ -7,6 +7,7 @@ namespace Game
         [SerializeField] private HippoMoove _hippoMoove;
         [SerializeField] private PersonsAttack _gippoAttack;
         [SerializeField] private UIButtons _uiButtons;
+        [SerializeField] private float _gravSnowBall = 0.5f;
 
         void Update()
         {
@@ -17,7 +18,7 @@ namespace Game
         {
             if (Input.GetKeyDown(KeyCode.Q)) 
             {                
-                _gippoAttack.Fire(false, 0.02f);
+                _gippoAttack.Fire(false, _gravSnowBall);
             }
             if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
             {

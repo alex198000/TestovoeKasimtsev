@@ -92,7 +92,7 @@ namespace Game
 
                 yield return new WaitForFixedUpdate();
             }
-            double ro = Convert.ToDouble(rand.Next(30, 100) / 10.0);
+            double ro = Convert.ToDouble(rand.Next(50, 100) / 10.0);
             _stopMoove = false;
             _mooveTrue = ro; 
             StartCoroutine(MooveOn());
@@ -101,6 +101,7 @@ namespace Game
         private void StopDeActiv()
         {
             _mooveStop = 0;
+            //_mooveTrue = 7;
         }
     }
 }

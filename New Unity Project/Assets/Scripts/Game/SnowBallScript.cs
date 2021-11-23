@@ -6,9 +6,10 @@ namespace Game
     {        
         [SerializeField] private int _damageSnowBall = 1;        
         [SerializeField] private float _speedSnowBall;
-        [SerializeField] private float _speedSnowBallEnemy;
-        [SerializeField] private Rigidbody2D _rbSnowBall;
+        [SerializeField] private float _speedSnowBallEnemy;        
         [SerializeField] private bool _isEnemyShot = false;
+
+        [SerializeField] private Rigidbody2D _rbSnowBall;
         [SerializeField] private SnowBallProperty _snowBallProperty;
 
         public int DamageSnowBall { get => _damageSnowBall; set => _damageSnowBall = value; }

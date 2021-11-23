@@ -17,11 +17,10 @@ namespace Game
         [SerializeField] protected ScoreControl _scoreControl;
         [SerializeField] protected SettingsControl _settingsControl;
         [SerializeField] protected LevelManager _levelManager;
-        [SerializeField] protected List<Image> _starImage;
-        [SerializeField] private ParticleSystem _particleWin;
-        [SerializeField] private ParticleSystem _particleDefeat;
+        [SerializeField] protected List<Image> _starImage;        
         [SerializeField] protected PersonsHealth _gippoHealth;
         [SerializeField] private PersonsAttack _gippoAttack;
+        [SerializeField] private float _gravSnow = 0.5f;
 
         [SerializeField] protected Timer _timer;
 
@@ -95,7 +94,7 @@ namespace Game
         }
         public void UiFireButton()
         {
-            _gippoAttack.Fire(false, 0.02f);
+            _gippoAttack.Fire(false, _gravSnow);
         }
 
         private void OnDisable()

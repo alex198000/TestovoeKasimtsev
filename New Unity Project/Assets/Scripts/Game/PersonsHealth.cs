@@ -21,17 +21,9 @@ namespace Game
 
         private void OnEnable()
         {
-            _hpPersons = _health;
-            Timer.OnEndGame += StopAllCoroutines;
-            LevelManager.OnWinGame += StopAllCoroutines;
-            OnDeathGippo += StopAllCoroutines;
+            _hpPersons = _health;           
         }
-        private void OnDisable()
-        {
-            Timer.OnEndGame -= StopAllCoroutines;
-            LevelManager.OnWinGame -= StopAllCoroutines;
-            OnDeathGippo -= StopAllCoroutines;
-        }
+        
 
         private void OnTriggerEnter2D(Collider2D col)
         {
@@ -80,11 +72,6 @@ namespace Game
             _enemyScript.EnemyDeath();
             
             yield return new WaitForFixedUpdate();           
-        }  
-        //void StopCorutines()
-        //{
-        //    StopCoroutine(WoundedEnemy());
-        //    StopCoroutine(DeadEnemy());
-        //}
+        }          
     }
 }
