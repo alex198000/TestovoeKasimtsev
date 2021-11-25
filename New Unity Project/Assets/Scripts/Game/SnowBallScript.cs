@@ -19,7 +19,7 @@ namespace Game
         private void OnEnable()
         {
 
-            _speedSnowBall = _snowBallProperty.SpeedSnowBallValue;
+            _speedSnowBall = _snowBallProperty.SpeedSnowBallValue * 4;
 
             if (_isEnemyShot)
             {

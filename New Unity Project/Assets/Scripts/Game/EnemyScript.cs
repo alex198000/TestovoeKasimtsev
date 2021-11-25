@@ -31,7 +31,7 @@ namespace Game
             Timer.OnEndGame += EnemyDeactiv;
             LevelManager.OnWinGame += EnemyDeactiv;
             PersonsHealth.OnDeathGippo += EnemyDeactiv;
-            //PersonsHealth.OnHitEnemy += EnemyWounded;
+            //PersonsHealth.OnHitEnemy += EnemyDeath;
             _enemyStateOn = false;
             _enemyStateOff = false;
         }
@@ -41,7 +41,7 @@ namespace Game
             Timer.OnEndGame -= EnemyDeactiv;
             LevelManager.OnWinGame -= EnemyDeactiv;
             PersonsHealth.OnDeathGippo -= EnemyDeactiv;
-            //PersonsHealth.OnHitEnemy -= EnemyWounded;            
+            //PersonsHealth.OnHitEnemy -= EnemyDeath;            
         }
 
         public void SetPropertyToEnemy(EnemyProperty enemyProperty)             // форммируем врага
@@ -68,17 +68,24 @@ namespace Game
         {            
                 _enemyStateOn = false;
                 _enemyStateOff = true;
-                _enemyMoove.SpeedEnemy += 50;
-            //_enemyMoove.MooveStop = 0;
-            _enemyMoove.Diraction = new Vector3(_enemyMoove.Right, _enemyMoove.Diraction.y, _enemyMoove.Diraction.z);            
-        }
-        public void EnemyWounded()
-        {            
-            _enemyMoove.SpeedEnemy = 0f;
-            _hitParticle.Play();
+                _enemyMoove.SpeedEnemy += 5;
+            
             float timeAnimWoundEnem = _skeleton.skeleton.Data.FindAnimation("wake_up").Duration;
             _skeleton.state.SetAnimation(0, "wake_up", false);
             _skeleton.state.AddAnimation(0, "Idle", true, timeAnimWoundEnem);
+            _enemyMoove.MooveStop = 0;
+            //_enemyMoove.MooveStop = timeAnimWoundEnem;
+            //_enemyMoove.MooveTrue = 0;
+            //_enemyMoove.StopMoove = true;
+            _enemyMoove.Diraction = new Vector3(_enemyMoove.Right, _enemyMoove.Diraction.y, _enemyMoove.Diraction.z);            
         }
+        //public void EnemyWounded()
+        //{            
+        //    _enemyMoove.SpeedEnemy = 0f;
+        //    _hitParticle.Play();
+        //    float timeAnimWoundEnem = _skeleton.skeleton.Data.FindAnimation("wake_up").Duration;
+        //    _skeleton.state.SetAnimation(0, "wake_up", false);
+        //    _skeleton.state.AddAnimation(0, "Idle", true, timeAnimWoundEnem);
+        //}
     }
 }

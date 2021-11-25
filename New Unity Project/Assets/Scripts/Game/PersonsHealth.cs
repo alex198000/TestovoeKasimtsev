@@ -8,6 +8,7 @@ namespace Game
     {
         [SerializeField] private int _hpPersons;
         [SerializeField] private ScoreControl _scoreControl;
+        [SerializeField] private EnemyMoove _enemyMoove;
         [SerializeField] private EnemyScript _enemyScript;
         [SerializeField] private bool _isEmemy = false;
 
@@ -39,8 +40,10 @@ namespace Game
                     {                        
                         _hpPersons = _health;
                         _scoreControl.Score += _bonus;
+                        _enemyMoove.ParticleEnemy();
+                        _enemyScript.EnemyDeath();
                         OnHitEnemy?.Invoke();
-                        if(gameObject.active) StartCoroutine(WoundedEnemy());
+                        //if(gameObject.active) StartCoroutine(WoundedEnemy());
                     }
                 }
                 if (_isEmemy == false && snowBallScript.IsEnemyShot)
@@ -58,20 +61,20 @@ namespace Game
             }
         }
 
-        private IEnumerator WoundedEnemy()
-        {            
-          _enemyScript.EnemyWounded();
-          yield return new WaitForSeconds(1f);           
+        //private IEnumerator WoundedEnemy()
+        //{            
+        //  _enemyScript.EnemyWounded();
+        //  yield return new WaitForSeconds(1f);           
             
-          StartCoroutine(DeadEnemy());
-          yield return new WaitForFixedUpdate();
-        }
+        //  StartCoroutine(DeadEnemy());
+        //  yield return new WaitForFixedUpdate();
+        //}
 
-        private IEnumerator DeadEnemy()
-        {            
-            _enemyScript.EnemyDeath();
+        //private IEnumerator DeadEnemy()
+        //{            
+        //    _enemyScript.EnemyDeath();
             
-            yield return new WaitForFixedUpdate();           
-        }          
+        //    yield return new WaitForFixedUpdate();           
+        //}          
     }
 }

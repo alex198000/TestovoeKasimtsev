@@ -15,6 +15,8 @@ namespace Game
         [SerializeField] private int _right = -1;
         [SerializeField] private Rigidbody2D _rb;
         [SerializeField] private bool _stopMoove;
+        [SerializeField] private string _particleEnemyTag;
+        [SerializeField] private Transform _particleManager;
 
         System.Random rand = new System.Random();
         public Vector3 Diraction { get => _diraction; set => _diraction = value; }
@@ -23,11 +25,12 @@ namespace Game
         public int Right { get => _right; set => _right = value; }
         public bool StopMoove { get => _stopMoove; set => _stopMoove = value; }
         public double MooveStop { get => _mooveStop; set => _mooveStop = value; }
+        public double MooveTrue { get => _mooveTrue; set => _mooveTrue = value; }
 
         private void OnEnable()
         {
-            PersonsHealth.OnHitEnemy += StopDeActiv;
-            //PersonsAttack.OnShotEnemy += AttackEnemy;
+            //PersonsHealth.OnHitEnemy += StopDeActiv;
+            //PersonsHealth.OnHitEnemy += ParticleEnemy;
             _stopMoove = false;
             _diraction.x = _left;
             _speedEnemy = _settingsControl.SpeedEnemy;
@@ -36,8 +39,8 @@ namespace Game
 
         private void OnDisable()
         {
-            PersonsHealth.OnHitEnemy -= StopDeActiv;
-            //PersonsAttack.OnShotEnemy -= AttackEnemy;
+            //PersonsHealth.OnHitEnemy -= StopDeActiv;
+            //PersonsHealth.OnHitEnemy -= ParticleEnemy;
             StopCoroutine(MooveOn());
         }
 
@@ -98,10 +101,28 @@ namespace Game
             StartCoroutine(MooveOn());
             yield return null;
         }
-        private void StopDeActiv()
+        //private void StopDeActiv()
+        //{
+        //    _mooveStop = 0;
+        //    //_mooveTrue = 7;
+        //}
+
+        public void ParticleEnemy()
         {
-            _mooveStop = 0;
-            //_mooveTrue = 7;
+                GameObject ParticleEnemy = ObjectPooler.objectPooler.GetPooledObject(_particleEnemyTag);
+                if (ParticleEnemy != null)
+             {                                 
+                ParticleEnemy.transform.position = gameObject.transform.position;
+                ParticleEnemy.transform.rotation = gameObject.transform.rotation;
+                                    
+                ParticleEnemy.SetActive(true);
+                ParticleEnemy.GetComponent<ParticleSystem>().Play();
+                ParticleEnemy.GetComponent<AudioSource>().Play();
+                //ParticleEnemy.transform.SetParent(_particleManager);
+                   
+             }
+                
+            
         }
     }
 }

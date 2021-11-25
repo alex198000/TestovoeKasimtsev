@@ -32,7 +32,7 @@ namespace Game
         }
         void Update()
         {
-            _position = new Vector3(0f, SimpleInput.GetAxis("Vertical"), 0f);          // SimpleInput.GetAxis("Horizontal"),     //если нужно будет двигаться по х
+            _position = new Vector3(SimpleInput.GetAxis("Horizontal"), SimpleInput.GetAxis("Vertical"), 0f);          // SimpleInput.GetAxis("Horizontal"),     //если нужно будет двигаться по х
 
             if (SimpleInput.GetAxis("Vertical") != 0 && _animPerson.AnimationName != "walk")
             {
@@ -67,6 +67,7 @@ namespace Game
         {
             base.Wounded();
             _hippoParticle.Play();
+            _hippoParticle.GetComponent<AudioSource>().Play();
         }
     }
 }

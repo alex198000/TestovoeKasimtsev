@@ -53,6 +53,7 @@ namespace Game
                 if (_winPanel.transform.position.y < 0)    //если панель под экраном
                 {
                     _particleWin.Play();   //<ParticleSystem.MainModule>
+                    _particleWin.GetComponent<AudioSource>().Play();
                     _lockFunc = true;
                     OnTimerStop?.Invoke();
                     Time.timeScale = 0;
@@ -102,6 +103,7 @@ namespace Game
                 if (_defeatPanel.transform.position.y < 0)
                 {
                     _particleDefeat.Play();
+                    _particleDefeat.GetComponent<AudioSource>().Play();
                     _lockFunc = true;
                     OnTimerStop?.Invoke();
                     Time.timeScale = 0;
