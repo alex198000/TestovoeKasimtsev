@@ -20,8 +20,8 @@ namespace Game
         }
         protected override void Attack()
         {
-            float timeAnim = _animPerson.skeleton.Data.FindAnimation("shoot").Duration;
-            _animPerson.state.SetAnimation(0, "shoot", false);
+            float timeAnim = _animPerson.skeleton.Data.FindAnimation("joy").Duration;
+            _animPerson.state.SetAnimation(0, "joy", false);
             _animPerson.state.AddAnimation(0, "Idle", true, timeAnim);
         }
 
@@ -30,6 +30,18 @@ namespace Game
             float timeAnimWound = _animPerson.skeleton.Data.FindAnimation("wake_up").Duration;
             _animPerson.state.SetAnimation(0, "wake_up", false);
             _animPerson.state.AddAnimation(0, "Idle", true, timeAnimWound);
+            GameObject ParticleEnemy = ObjectPooler.objectPooler.GetPooledObject(_particleTag);
+            if (ParticleEnemy != null)
+            {
+                ParticleEnemy.transform.position = gameObject.transform.position;
+                ParticleEnemy.transform.rotation = gameObject.transform.rotation;
+
+                ParticleEnemy.SetActive(true);
+                ParticleEnemy.GetComponent<ParticleSystem>().Play();
+                ParticleEnemy.GetComponent<AudioSource>().Play();
+                //ParticleEnemy.transform.SetParent(_particleManager);
+
+            }
         }
 
         public void RightMove()

@@ -31,7 +31,7 @@ namespace Game
             Timer.OnEndGame += EnemyDeactiv;
             LevelManager.OnWinGame += EnemyDeactiv;
             PersonsHealth.OnDeathGippo += EnemyDeactiv;
-            //PersonsHealth.OnHitEnemy += EnemyDeath;
+          
             _enemyStateOn = false;
             _enemyStateOff = false;
         }
@@ -40,8 +40,7 @@ namespace Game
         {
             Timer.OnEndGame -= EnemyDeactiv;
             LevelManager.OnWinGame -= EnemyDeactiv;
-            PersonsHealth.OnDeathGippo -= EnemyDeactiv;
-            //PersonsHealth.OnHitEnemy -= EnemyDeath;            
+            PersonsHealth.OnDeathGippo -= EnemyDeactiv;                       
         }
 
         public void SetPropertyToEnemy(EnemyProperty enemyProperty)             // форммируем врага
@@ -50,17 +49,13 @@ namespace Game
             transform.localScale = new Vector3(enemyProperty.ScaleEnemy.x, enemyProperty.ScaleEnemy.y, enemyProperty.ScaleEnemy.z);
             _enemyHealth.HpMax = enemyProperty.EnemyHealth;
             _enemyHealth.HpPersons = _enemyHealth.HpMax;
-            _colider.size = enemyProperty.EnemyColl;
-            //_hitParticle = enemyProperty.ParticleHit;
+            _colider.size = enemyProperty.EnemyColl;         
             _enemyHealth.Bonus = enemyProperty.Bonus;
             _skeleton.initialSkinName = enemyProperty.InitialSkin;                             //смена скина врага
             _skeleton.Skeleton.SetSkin(enemyProperty.InitialSkin);            
         }    
         void EnemyDeactiv()
         {
-
-            //_enemyHealth.StopCoroutine(WoundedEnemy());
-            //_enemyHealth.StopCoroutine(DeadEnemy());
             gameObject.SetActive(false);
         }
 
@@ -68,24 +63,10 @@ namespace Game
         {            
                 _enemyStateOn = false;
                 _enemyStateOff = true;
-                _enemyMoove.SpeedEnemy += 5;
+                _enemyMoove.SpeedEnemy += 5;            
+                _enemyMoove.MooveStop = 0;
             
-            float timeAnimWoundEnem = _skeleton.skeleton.Data.FindAnimation("wake_up").Duration;
-            _skeleton.state.SetAnimation(0, "wake_up", false);
-            _skeleton.state.AddAnimation(0, "Idle", true, timeAnimWoundEnem);
-            _enemyMoove.MooveStop = 0;
-            //_enemyMoove.MooveStop = timeAnimWoundEnem;
-            //_enemyMoove.MooveTrue = 0;
-            //_enemyMoove.StopMoove = true;
             _enemyMoove.Diraction = new Vector3(_enemyMoove.Right, _enemyMoove.Diraction.y, _enemyMoove.Diraction.z);            
-        }
-        //public void EnemyWounded()
-        //{            
-        //    _enemyMoove.SpeedEnemy = 0f;
-        //    _hitParticle.Play();
-        //    float timeAnimWoundEnem = _skeleton.skeleton.Data.FindAnimation("wake_up").Duration;
-        //    _skeleton.state.SetAnimation(0, "wake_up", false);
-        //    _skeleton.state.AddAnimation(0, "Idle", true, timeAnimWoundEnem);
-        //}
+        }     
     }
 }

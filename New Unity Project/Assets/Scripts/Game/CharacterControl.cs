@@ -5,8 +5,7 @@ namespace Game
     public class CharacterControl : HippoMoove
     {
         [SerializeField] private SettingsControl _settingsControl;
-        [SerializeField] private float _speedPlayer;
-        [SerializeField] private ParticleSystem _hippoParticle;
+        [SerializeField] private float _speedPlayer;     
 
         private Vector3 _position;
 
@@ -42,6 +41,14 @@ namespace Game
             {
                 Idle();
             }
+            //if (SimpleInput.GetAxis("Horizontal") != 0 && _animPerson.AnimationName != "walk")
+            //{
+            //    LeftMove();
+            //}
+            //if (SimpleInput.GetAxis("Horizontal") == 0 && _animPerson.AnimationName == "walk")
+            //{
+            //    LeftMove();
+            //}
             transform.position += _position * Time.deltaTime * _speedPlayer;
         }
 
@@ -65,9 +72,7 @@ namespace Game
 
         protected override void Wounded()
         {
-            base.Wounded();
-            _hippoParticle.Play();
-            _hippoParticle.GetComponent<AudioSource>().Play();
+            base.Wounded();           
         }
     }
 }

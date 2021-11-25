@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animPerson: {fileID: 5286834731100714237}
+  _particleTag: ParticleHit
   _actors: {fileID: 5286834730768764309}
   _settingsControl: {fileID: 11400000, guid: be45d6dce087eb54781b94b179b9cb8d, type: 2}
   _diraction: {x: 1, y: 0, z: 0}
@@ -149,8 +150,6 @@ MonoBehaviour:
   _right: -1
   _rb: {fileID: 5286834730768764308}
   _stopMoove: 0
-  _particleEnemyTag: ParticleHit
-  _particleManager: {fileID: 0}
 --- !u!114 &-6523485052306089734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,6 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animPerson: {fileID: 5286834731100714237}
+  _particleTag: ParticleHit
   _actors: {fileID: 5286834730768764309}
 --- !u!1 &5286834731100714226
 GameObject:

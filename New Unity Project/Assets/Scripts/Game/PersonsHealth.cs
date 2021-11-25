@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 namespace Game
@@ -40,7 +39,7 @@ namespace Game
                     {                        
                         _hpPersons = _health;
                         _scoreControl.Score += _bonus;
-                        _enemyMoove.ParticleEnemy();
+                        _enemyMoove.WoundedEnemy();
                         _enemyScript.EnemyDeath();
                         OnHitEnemy?.Invoke();
                         //if(gameObject.active) StartCoroutine(WoundedEnemy());
@@ -59,22 +58,6 @@ namespace Game
                     }
                 }
             }
-        }
-
-        //private IEnumerator WoundedEnemy()
-        //{            
-        //  _enemyScript.EnemyWounded();
-        //  yield return new WaitForSeconds(1f);           
-            
-        //  StartCoroutine(DeadEnemy());
-        //  yield return new WaitForFixedUpdate();
-        //}
-
-        //private IEnumerator DeadEnemy()
-        //{            
-        //    _enemyScript.EnemyDeath();
-            
-        //    yield return new WaitForFixedUpdate();           
-        //}          
+        }       
     }
 }

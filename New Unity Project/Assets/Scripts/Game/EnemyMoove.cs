@@ -15,9 +15,7 @@ namespace Game
         [SerializeField] private int _right = -1;
         [SerializeField] private Rigidbody2D _rb;
         [SerializeField] private bool _stopMoove;
-        [SerializeField] private string _particleEnemyTag;
-        [SerializeField] private Transform _particleManager;
-
+      
         System.Random rand = new System.Random();
         public Vector3 Diraction { get => _diraction; set => _diraction = value; }
         public float SpeedEnemy { get => _speedEnemy; set => _speedEnemy = value; }
@@ -29,8 +27,6 @@ namespace Game
 
         private void OnEnable()
         {
-            //PersonsHealth.OnHitEnemy += StopDeActiv;
-            //PersonsHealth.OnHitEnemy += ParticleEnemy;
             _stopMoove = false;
             _diraction.x = _left;
             _speedEnemy = _settingsControl.SpeedEnemy;
@@ -39,8 +35,6 @@ namespace Game
 
         private void OnDisable()
         {
-            //PersonsHealth.OnHitEnemy -= StopDeActiv;
-            //PersonsHealth.OnHitEnemy -= ParticleEnemy;
             StopCoroutine(MooveOn());
         }
 
@@ -100,29 +94,11 @@ namespace Game
             _mooveTrue = ro; 
             StartCoroutine(MooveOn());
             yield return null;
-        }
-        //private void StopDeActiv()
-        //{
-        //    _mooveStop = 0;
-        //    //_mooveTrue = 7;
-        //}
+        }       
 
-        public void ParticleEnemy()
+        public void WoundedEnemy()
         {
-                GameObject ParticleEnemy = ObjectPooler.objectPooler.GetPooledObject(_particleEnemyTag);
-                if (ParticleEnemy != null)
-             {                                 
-                ParticleEnemy.transform.position = gameObject.transform.position;
-                ParticleEnemy.transform.rotation = gameObject.transform.rotation;
-                                    
-                ParticleEnemy.SetActive(true);
-                ParticleEnemy.GetComponent<ParticleSystem>().Play();
-                ParticleEnemy.GetComponent<AudioSource>().Play();
-                //ParticleEnemy.transform.SetParent(_particleManager);
-                   
-             }
-                
-            
+            base.Wounded();
         }
     }
 }

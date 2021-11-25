@@ -17,7 +17,7 @@ namespace Game
         }
         protected override void Attack()
         {
-            float timeAnim = _animPerson.skeleton.Data.FindAnimation("shoot").Duration;
+            float timeAnim = _animPerson.skeleton.Data.FindAnimation("Applause").Duration;
             _animPerson.state.SetAnimation(0, "Applause", false);
             _animPerson.state.AddAnimation(0, "Idle", true, timeAnim);
         }
@@ -27,6 +27,18 @@ namespace Game
             float timeAnimWoundEnem = _animPerson.skeleton.Data.FindAnimation("wake_up").Duration;
             _animPerson.state.SetAnimation(0, "wake_up", false);
             _animPerson.state.AddAnimation(0, "Idle", true, timeAnimWoundEnem);
+            GameObject ParticleEnemy = ObjectPooler.objectPooler.GetPooledObject(_particleTag);
+            if (ParticleEnemy != null)
+            {
+                ParticleEnemy.transform.position = gameObject.transform.position;
+                ParticleEnemy.transform.rotation = gameObject.transform.rotation;
+
+                ParticleEnemy.SetActive(true);
+                ParticleEnemy.GetComponent<ParticleSystem>().Play();
+                ParticleEnemy.GetComponent<AudioSource>().Play();
+                //ParticleEnemy.transform.SetParent(_particleManager);
+
+            }
         }
     }
 }
